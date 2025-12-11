@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { http } from "../services/api"; // Ajusta la ruta según tu estructura
+import { http } from "../lib/api"; // Ajusta la ruta según tu estructura
 import "./Register.css";
 import TC from "../components/layouts/TC";
 
