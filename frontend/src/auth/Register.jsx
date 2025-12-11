@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import axios from "axios";
+import { http } from "../services/api"; // ⭐ LÍNEA 2 CAMBIADA - Ajusta la ruta según tu estructura
 import "./Register.css";
 import TC from "../components/layouts/TC";
 
@@ -30,13 +30,15 @@ export function Register({ onLoginClick, onClose }) {
 
   const modalRef = useRef(null);
 
-  const urlRegister = "/api/auth/register";
-  const urlDocumentTypes = "/api/types-documents";
+  // ⭐ LÍNEAS 27-28 CAMBIADAS - Removido /api del inicio
+  const urlRegister = "/auth/register";
+  const urlDocumentTypes = "/types-documents";
 
   useEffect(() => {
     const fetchDocumentTypes = async () => {
       try {
-        const { data } = await axios.get(urlDocumentTypes);
+        // ⭐ LÍNEA 36 CAMBIADA - Usando http en lugar de axios
+        const { data } = await http.get(urlDocumentTypes);
         setDocumentTypes(data || []);
       } catch (error) {
         console.error("Error fetching document types:", error);
@@ -171,7 +173,8 @@ export function Register({ onLoginClick, onClose }) {
 
     try {
       setLoading(true);
-      const { data } = await axios.post(urlRegister, payload);
+      // ⭐ LÍNEA 164 CAMBIADA - Usando http en lugar de axios
+      const { data } = await http.post(urlRegister, payload);
       setMessage(
         data?.message ||
           "✅ Successful registration. Please check your email."
@@ -482,7 +485,7 @@ export function Register({ onLoginClick, onClose }) {
           />
           <label htmlFor="termsCheck">
             I accept the{" "}
-            <a
+            
               href="#"
               className="aRegister"
               onClick={(e) => {
@@ -509,7 +512,7 @@ export function Register({ onLoginClick, onClose }) {
           {loading ? "Processing..." : "Sign Up"}
         </button>
         <div className="aPosition">
-          <a
+          
             href=""
             className="aRegister"
             onClick={(e) => {
