@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { http } from "../services/api"; // ⭐ LÍNEA 2 CAMBIADA - Ajusta la ruta según tu estructura
+import { http } from "../services/api"; // Ajusta la ruta según tu estructura
 import "./Register.css";
 import TC from "../components/layouts/TC";
 
@@ -20,8 +20,8 @@ export function Register({ onLoginClick, onClose }) {
 
   const [documentTypes, setDocumentTypes] = useState([]);
   const [message, setMessage] = useState("");
-  const [registerError, setRegisterError] = useState(""); // light error (autocloses)
-  const [modalOpen, setModalOpen] = useState(false);      // "strong" error modal
+  const [registerError, setRegisterError] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [canCheck, setCanCheck] = useState(false);
@@ -30,14 +30,12 @@ export function Register({ onLoginClick, onClose }) {
 
   const modalRef = useRef(null);
 
-  // ⭐ LÍNEAS 27-28 CAMBIADAS - Removido /api del inicio
   const urlRegister = "/auth/register";
   const urlDocumentTypes = "/types-documents";
 
   useEffect(() => {
     const fetchDocumentTypes = async () => {
       try {
-        // ⭐ LÍNEA 36 CAMBIADA - Usando http en lugar de axios
         const { data } = await http.get(urlDocumentTypes);
         setDocumentTypes(data || []);
       } catch (error) {
@@ -173,7 +171,6 @@ export function Register({ onLoginClick, onClose }) {
 
     try {
       setLoading(true);
-      // ⭐ LÍNEA 164 CAMBIADA - Usando http en lugar de axios
       const { data } = await http.post(urlRegister, payload);
       setMessage(
         data?.message ||
@@ -213,7 +210,6 @@ export function Register({ onLoginClick, onClose }) {
         !e.target.closest("#userIcon") &&
         !e.target.closest("#mobileUserIcon");
 
-      // En móvil ignoramos toques en la pantalla táctil que sean scroll
       if (
         clickedOutside &&
         !(e.type === "touchstart" && e.target.closest(".modal"))
@@ -242,7 +238,6 @@ export function Register({ onLoginClick, onClose }) {
       return () => clearTimeout(t);
     }
   }, [registerError]);
-
 
   return (
     <section className="Register" ref={modalRef} role="dialog" aria-modal="true">
