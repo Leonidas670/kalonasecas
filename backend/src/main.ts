@@ -21,6 +21,7 @@ async function bootstrap() {
       'https://kalonasecas.vercel.app',
       'https://kalonitinere.site',
       'kalonasecas-2jlg.vercel.app',
+      'frontkalon.netlify.app',
       /\.vercel\.app$/, // Permite todos los subdominios de vercel.app (para preview deployments)
     ],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
