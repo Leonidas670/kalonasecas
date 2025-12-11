@@ -43,7 +43,7 @@ model packages_activities {
 model climates {
   id_climate            Int                     @id @default(autoincrement())
   code                  String                  @unique        // "THEMATIC" | "TEMPERATE" | "WARM"
-  name                  String                                  // “Lugares Temáticos”, “Templado”, “Cálido”
+  name                  String                                  // "Lugares Temáticos", "Templado", "Cálido"
   description           String?
   is_active             Boolean                 @default(true)
   places                places_recreationals[]
@@ -143,6 +143,9 @@ model users {
 
   // Avatar / foto
   photo_user           String?
+
+  // Campo agregado para logout
+  lastLogoutAt         DateTime?
 
   // relación con favoritos (opcional, pero útil)
   favorites            favorites[]
